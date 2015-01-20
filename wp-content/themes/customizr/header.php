@@ -27,12 +27,22 @@
 		
 		<?php do_action( '__before_header' ); ?>
 
-	   	<header class="<?php echo implode( " ", apply_filters('tc_header_classes', array('tc-header' ,'clearfix', 'row-fluid') ) ) ?>" role="banner">
+	   	<header class="<?php echo implode( " ", apply_filters('tc_header_classes', array('tc-header' ,'clearfix', 'row-fluid') ) ) ?>" role="banner">			
 			<?php 
 				// The '__header' hook is used with the following callback functions (ordered by priorities) : 
 				//TC_header_main::$instance->tc_logo_title_display(), TC_header_main::$instance->tc_tagline_display(), TC_header_main::$instance->tc_navbar_display()
 				do_action( '__header' );
 			?>
+			<script type="text/javascript">
+				jQuery(document).ready(function() {
+				jQuery('.menu-item').click( function() {
+					var page = jQuery(this).children().attr('href'); // Page cible
+					var speed = 750; // Durée de l'animation (en ms)
+					jQuery('html, body').animate( { scrollTop: jQuery(page).offset().top-100 }, speed ); // Go
+				return false;
+				});
+				});
+			</script>					
 		</header>
 		<?php 
 		 	//This hook is used for the slider : TC_slider::$instance->tc_slider_display()
